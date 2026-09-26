@@ -1,0 +1,9 @@
+data/
+.venv/
+__pycache__/
+*.pyc
+models/
+_quick/
+*.pt
+*.npy
+.DS_Store

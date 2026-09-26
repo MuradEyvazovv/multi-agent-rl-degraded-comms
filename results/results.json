@@ -1,0 +1,735 @@
+{
+  "project": "multi-agent-rl-degraded-comms",
+  "question": "How much does losing the comm link hurt two cooperating robots, and do learned policies cope better than the 'Hold when comms are degraded' rule?",
+  "config": {
+    "grid": "7x9",
+    "max_steps": 40,
+    "p_values": [
+      0.0,
+      0.25,
+      0.5,
+      0.75,
+      0.9
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "train_layouts": 400,
+    "held_out_test_layouts": 200,
+    "eval_episodes_per_seed_per_scenario": 500,
+    "tabular_train_episodes": 60000,
+    "dqn_train_env_steps": 400000,
+    "dqn_loss": "mse",
+    "training_mix": "50% open, 50% close-quarters",
+    "rewards": {
+      "step": -0.1,
+      "reach_target": 10.0,
+      "collision": -10.0,
+      "collision_ends_episode": true
+    },
+    "memory_yield_rule_yield_age": 5
+  },
+  "memory_yield_selection_on_training_layouts": {
+    "1": 0.9792,
+    "2": 0.9785,
+    "3": 0.98,
+    "5": 0.9808
+  },
+  "device_benchmark_ms": {
+    "cpu": {
+      "update_ms": 0.485,
+      "act_ms": 0.037
+    },
+    "mps": {
+      "update_ms": 2.058,
+      "act_ms": 0.698
+    }
+  },
+  "device_used": "cpu",
+  "runtime": {
+    "total_wall_clock_minutes": 5.96,
+    "train_and_eval_pool_wall_clock_minutes": 5.84,
+    "learned_policy_training_cpu_minutes_summed": 65.56,
+    "workers": 12,
+    "machine": "arm64 Darwin torch 2.14.0"
+  },
+  "shortest_path_makespan_lower_bound_steps": {
+    "open": 7.066,
+    "close": 7.435
+  },
+  "headline": {
+    "open_p0": {
+      "rule_hold": {
+        "success_rate": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 7.414,
+          "std": 0.0934
+        }
+      },
+      "rule_nohold": {
+        "success_rate": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 7.414,
+          "std": 0.0934
+        }
+      },
+      "rule_memyield": {
+        "success_rate": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 7.414,
+          "std": 0.0934
+        }
+      },
+      "tabular_q": {
+        "success_rate": {
+          "mean": 0.9904,
+          "std": 0.0043
+        },
+        "collision_rate": {
+          "mean": 0.0008,
+          "std": 0.0011
+        },
+        "timeout_rate": {
+          "mean": 0.0088,
+          "std": 0.0046
+        },
+        "steps_success": {
+          "mean": 7.4895,
+          "std": 0.0938
+        }
+      },
+      "dqn": {
+        "success_rate": {
+          "mean": 0.996,
+          "std": 0.0035
+        },
+        "collision_rate": {
+          "mean": 0.0004,
+          "std": 0.0009
+        },
+        "timeout_rate": {
+          "mean": 0.0036,
+          "std": 0.0038
+        },
+        "steps_success": {
+          "mean": 7.4249,
+          "std": 0.1031
+        }
+      },
+      "dqn_mem": {
+        "success_rate": {
+          "mean": 0.996,
+          "std": 0.0035
+        },
+        "collision_rate": {
+          "mean": 0.0004,
+          "std": 0.0009
+        },
+        "timeout_rate": {
+          "mean": 0.0036,
+          "std": 0.0038
+        },
+        "steps_success": {
+          "mean": 7.4249,
+          "std": 0.1031
+        }
+      }
+    },
+    "open_p0.75": {
+      "rule_hold": {
+        "success_rate": {
+          "mean": 0.7916,
+          "std": 0.0149
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.2084,
+          "std": 0.0149
+        },
+        "steps_success": {
+          "mean": 24.4381,
+          "std": 0.2961
+        }
+      },
+      "rule_nohold": {
+        "success_rate": {
+          "mean": 0.9576,
+          "std": 0.0064
+        },
+        "collision_rate": {
+          "mean": 0.0424,
+          "std": 0.0064
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 7.2527,
+          "std": 0.0961
+        }
+      },
+      "rule_memyield": {
+        "success_rate": {
+          "mean": 0.9764,
+          "std": 0.0046
+        },
+        "collision_rate": {
+          "mean": 0.0236,
+          "std": 0.0046
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.6412,
+          "std": 0.0666
+        }
+      },
+      "tabular_q": {
+        "success_rate": {
+          "mean": 0.956,
+          "std": 0.0032
+        },
+        "collision_rate": {
+          "mean": 0.038,
+          "std": 0.0024
+        },
+        "timeout_rate": {
+          "mean": 0.006,
+          "std": 0.0028
+        },
+        "steps_success": {
+          "mean": 7.7676,
+          "std": 0.1616
+        }
+      },
+      "dqn": {
+        "success_rate": {
+          "mean": 0.9632,
+          "std": 0.0076
+        },
+        "collision_rate": {
+          "mean": 0.0336,
+          "std": 0.0064
+        },
+        "timeout_rate": {
+          "mean": 0.0032,
+          "std": 0.0039
+        },
+        "steps_success": {
+          "mean": 7.2387,
+          "std": 0.0443
+        }
+      },
+      "dqn_mem": {
+        "success_rate": {
+          "mean": 0.986,
+          "std": 0.0057
+        },
+        "collision_rate": {
+          "mean": 0.0132,
+          "std": 0.005
+        },
+        "timeout_rate": {
+          "mean": 0.0008,
+          "std": 0.0011
+        },
+        "steps_success": {
+          "mean": 7.5636,
+          "std": 0.2767
+        }
+      }
+    },
+    "open_p0.9": {
+      "rule_hold": {
+        "success_rate": {
+          "mean": 0.1764,
+          "std": 0.0142
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.8236,
+          "std": 0.0142
+        },
+        "steps_success": {
+          "mean": 28.0628,
+          "std": 0.7824
+        }
+      },
+      "rule_nohold": {
+        "success_rate": {
+          "mean": 0.9472,
+          "std": 0.0111
+        },
+        "collision_rate": {
+          "mean": 0.0528,
+          "std": 0.0111
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 7.172,
+          "std": 0.0813
+        }
+      },
+      "rule_memyield": {
+        "success_rate": {
+          "mean": 0.9756,
+          "std": 0.0068
+        },
+        "collision_rate": {
+          "mean": 0.0244,
+          "std": 0.0068
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.6963,
+          "std": 0.0821
+        }
+      },
+      "tabular_q": {
+        "success_rate": {
+          "mean": 0.934,
+          "std": 0.0098
+        },
+        "collision_rate": {
+          "mean": 0.0516,
+          "std": 0.0068
+        },
+        "timeout_rate": {
+          "mean": 0.0144,
+          "std": 0.0048
+        },
+        "steps_success": {
+          "mean": 7.7161,
+          "std": 0.2791
+        }
+      },
+      "dqn": {
+        "success_rate": {
+          "mean": 0.9468,
+          "std": 0.0081
+        },
+        "collision_rate": {
+          "mean": 0.0448,
+          "std": 0.007
+        },
+        "timeout_rate": {
+          "mean": 0.0084,
+          "std": 0.0074
+        },
+        "steps_success": {
+          "mean": 7.2897,
+          "std": 0.1988
+        }
+      },
+      "dqn_mem": {
+        "success_rate": {
+          "mean": 0.9856,
+          "std": 0.0082
+        },
+        "collision_rate": {
+          "mean": 0.0136,
+          "std": 0.0073
+        },
+        "timeout_rate": {
+          "mean": 0.0008,
+          "std": 0.0011
+        },
+        "steps_success": {
+          "mean": 7.3518,
+          "std": 0.163
+        }
+      }
+    },
+    "close_p0": {
+      "rule_hold": {
+        "success_rate": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.668,
+          "std": 0.1393
+        }
+      },
+      "rule_nohold": {
+        "success_rate": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.668,
+          "std": 0.1393
+        }
+      },
+      "rule_memyield": {
+        "success_rate": {
+          "mean": 1.0,
+          "std": 0.0
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.668,
+          "std": 0.1393
+        }
+      },
+      "tabular_q": {
+        "success_rate": {
+          "mean": 0.9688,
+          "std": 0.0066
+        },
+        "collision_rate": {
+          "mean": 0.0024,
+          "std": 0.0026
+        },
+        "timeout_rate": {
+          "mean": 0.0288,
+          "std": 0.0052
+        },
+        "steps_success": {
+          "mean": 8.8518,
+          "std": 0.1414
+        }
+      },
+      "dqn": {
+        "success_rate": {
+          "mean": 0.9904,
+          "std": 0.0071
+        },
+        "collision_rate": {
+          "mean": 0.0012,
+          "std": 0.0011
+        },
+        "timeout_rate": {
+          "mean": 0.0084,
+          "std": 0.0071
+        },
+        "steps_success": {
+          "mean": 8.6096,
+          "std": 0.168
+        }
+      },
+      "dqn_mem": {
+        "success_rate": {
+          "mean": 0.9904,
+          "std": 0.0071
+        },
+        "collision_rate": {
+          "mean": 0.0012,
+          "std": 0.0011
+        },
+        "timeout_rate": {
+          "mean": 0.0084,
+          "std": 0.0071
+        },
+        "steps_success": {
+          "mean": 8.6096,
+          "std": 0.168
+        }
+      }
+    },
+    "close_p0.75": {
+      "rule_hold": {
+        "success_rate": {
+          "mean": 0.6956,
+          "std": 0.0312
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.3044,
+          "std": 0.0312
+        },
+        "steps_success": {
+          "mean": 27.3548,
+          "std": 0.3819
+        }
+      },
+      "rule_nohold": {
+        "success_rate": {
+          "mean": 0.8664,
+          "std": 0.0211
+        },
+        "collision_rate": {
+          "mean": 0.1336,
+          "std": 0.0211
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.2409,
+          "std": 0.1091
+        }
+      },
+      "rule_memyield": {
+        "success_rate": {
+          "mean": 0.98,
+          "std": 0.0047
+        },
+        "collision_rate": {
+          "mean": 0.02,
+          "std": 0.0047
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 12.0806,
+          "std": 0.125
+        }
+      },
+      "tabular_q": {
+        "success_rate": {
+          "mean": 0.8808,
+          "std": 0.0132
+        },
+        "collision_rate": {
+          "mean": 0.1088,
+          "std": 0.0115
+        },
+        "timeout_rate": {
+          "mean": 0.0104,
+          "std": 0.0055
+        },
+        "steps_success": {
+          "mean": 8.9834,
+          "std": 0.2186
+        }
+      },
+      "dqn": {
+        "success_rate": {
+          "mean": 0.884,
+          "std": 0.0109
+        },
+        "collision_rate": {
+          "mean": 0.1124,
+          "std": 0.014
+        },
+        "timeout_rate": {
+          "mean": 0.0036,
+          "std": 0.0059
+        },
+        "steps_success": {
+          "mean": 7.9089,
+          "std": 0.1593
+        }
+      },
+      "dqn_mem": {
+        "success_rate": {
+          "mean": 0.9696,
+          "std": 0.0099
+        },
+        "collision_rate": {
+          "mean": 0.0304,
+          "std": 0.0099
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 8.5334,
+          "std": 0.3484
+        }
+      }
+    },
+    "close_p0.9": {
+      "rule_hold": {
+        "success_rate": {
+          "mean": 0.0776,
+          "std": 0.0137
+        },
+        "collision_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "timeout_rate": {
+          "mean": 0.9224,
+          "std": 0.0137
+        },
+        "steps_success": {
+          "mean": 31.932,
+          "std": 0.6398
+        }
+      },
+      "rule_nohold": {
+        "success_rate": {
+          "mean": 0.8488,
+          "std": 0.0174
+        },
+        "collision_rate": {
+          "mean": 0.1512,
+          "std": 0.0174
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 7.9188,
+          "std": 0.0848
+        }
+      },
+      "rule_memyield": {
+        "success_rate": {
+          "mean": 0.9884,
+          "std": 0.0038
+        },
+        "collision_rate": {
+          "mean": 0.0116,
+          "std": 0.0038
+        },
+        "timeout_rate": {
+          "mean": 0.0,
+          "std": 0.0
+        },
+        "steps_success": {
+          "mean": 12.5735,
+          "std": 0.1336
+        }
+      },
+      "tabular_q": {
+        "success_rate": {
+          "mean": 0.8292,
+          "std": 0.033
+        },
+        "collision_rate": {
+          "mean": 0.1524,
+          "std": 0.0338
+        },
+        "timeout_rate": {
+          "mean": 0.0184,
+          "std": 0.0085
+        },
+        "steps_success": {
+          "mean": 8.5986,
+          "std": 0.2409
+        }
+      },
+      "dqn": {
+        "success_rate": {
+          "mean": 0.8588,
+          "std": 0.0215
+        },
+        "collision_rate": {
+          "mean": 0.1344,
+          "std": 0.0244
+        },
+        "timeout_rate": {
+          "mean": 0.0068,
+          "std": 0.007
+        },
+        "steps_success": {
+          "mean": 7.9306,
+          "std": 0.1726
+        }
+      },
+      "dqn_mem": {
+        "success_rate": {
+          "mean": 0.9596,
+          "std": 0.0067
+        },
+        "collision_rate": {
+          "mean": 0.0392,
+          "std": 0.0064
+        },
+        "timeout_rate": {
+          "mean": 0.0012,
+          "std": 0.0027
+        },
+        "steps_success": {
+          "mean": 8.1672,
+          "std": 0.2441
+        }
+      }
+    }
+  },
+  "example_episode": {
+    "episode_index": 14,
+    "p": 0.75,
+    "outcomes": {
+      "rule_hold": "timeout",
+      "rule_nohold": "success",
+      "dqn_mem": "collision"
+    }
+  }
+}
