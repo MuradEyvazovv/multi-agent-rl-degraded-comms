@@ -2,7 +2,7 @@
   "title": "Multi-Agent RL Under Degraded Communications",
   "repo": "multi-agent-rl-degraded-comms",
   "summary": "A from-scratch two-robot gridworld (extending my Senior Design project) that measures how losing the radio link hurts cooperating robots and compares the old 'Hold when degraded' rule with tabular Q-learning, DQN, and a DQN with memory of the ally's last-known position on held-out maps.",
-  "headline": "With the link down 90% of the time, the original Hold rule completed 17.6% of missions (7.8% in close quarters) while a DQN with last-known-ally memory completed 98.6% (96.0%), mean of 5 seeds on held-out layouts.",
+  "headline": "With the link down 90% of the time, the original Hold rule completed 17.6% of missions (7.8% in close quarters); remembering the ally's last-known position fixed it: 98.6% (96.0%) with a DQN and 97.6% (98.8%) with a simple hand-written rule, mean of 5 seeds on held-out maps.",
   "tags": [
     "reinforcement learning",
     "multi-agent",
